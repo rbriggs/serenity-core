@@ -344,18 +344,16 @@ public class WhenBrowsingAWebSiteUsingPageObjects {
 
     public class FluentPage extends PageObject {
 
-        public WebElement state;
-
         public FluentPage(WebDriver driver) {
             super(driver);
         }
 
         public void setState(String stateValue) {
-            fluent().fill("#state").with(stateValue);
+            fluent().find("#state").fill().with(stateValue);
         }
 
         public String getStateValue() {
-            return $(state).getValue();
+            return fluent().find("#state").value();
         }
     }
 

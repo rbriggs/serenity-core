@@ -1,6 +1,7 @@
 dependencies {
     compile("org.jbehave:jbehave-core:3.9.5") {
         exclude group: "org.hamcrest"
+        exclude group: "commons-io", module: "commons-io"
         exclude group: "org.freemarker"
         exclude group: "junit", module:"junit"
     }

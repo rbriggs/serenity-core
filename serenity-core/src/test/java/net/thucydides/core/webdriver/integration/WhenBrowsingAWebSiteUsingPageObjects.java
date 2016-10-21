@@ -12,7 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.File;
@@ -93,7 +93,7 @@ public class WhenBrowsingAWebSiteUsingPageObjects {
 
     @Before
     public void openLocalStaticSite() {
-        driver = new HtmlUnitDriver();
+        driver = new PhantomJSDriver();
         openStaticTestSite();
         indexPage = new IndexPage(driver, 1);
         indexPage.setWaitForTimeout(100);
@@ -358,18 +358,16 @@ public class WhenBrowsingAWebSiteUsingPageObjects {
 
     public class FluentPage extends PageObject {
 
-        public WebElement state;
-
         public FluentPage(WebDriver driver) {
             super(driver);
         }
 
         public void setState(String stateValue) {
-            fluent().fill("#state").with(stateValue);
+            fluent().find("#state").fill().with(stateValue);
         }
 
         public String getStateValue() {
-            return $(state).getValue();
+            return fluent().find("#state").value();
         }
     }
 
