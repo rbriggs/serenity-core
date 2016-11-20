@@ -89,13 +89,13 @@ public class DanaGoesShoppingSample {
     @Test
     public void shouldBeAbleToRememberAnswersToQuestions() {
         dana.remember("Total Cost", theTotalCost());
-        assertThat(dana.recall("Total Cost")).isEqualTo(14);
+        assertThat((Integer) dana.recall("Total Cost")).isEqualTo(14);
     }
 
     @Test
     public void shouldBeAbleToRememberValues() {
         dana.remember("Total Cost", 14);
-        assertThat(dana.recall("Total Cost")).isEqualTo(14);
+        assertThat((Integer) dana.recall("Total Cost")).isEqualTo(14);
 
         List<String> colorSet = ImmutableList.of("red","green","blue");
 
