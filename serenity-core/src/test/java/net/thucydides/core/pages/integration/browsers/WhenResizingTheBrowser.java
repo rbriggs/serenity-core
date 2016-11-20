@@ -8,6 +8,7 @@ import net.thucydides.core.webdriver.SupportedWebDriver;
 import net.thucydides.core.webdriver.WebDriverFactory;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -21,6 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(Parameterized.class)
+@Ignore("Resizing doesn't work well in Geckodriver")
 public class WhenResizingTheBrowser {
 
     private final SupportedWebDriver driverType;
@@ -28,7 +30,7 @@ public class WhenResizingTheBrowser {
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
         return Arrays.asList(new Object[][] {
-          //    {SupportedWebDriver.FIREFOX },      // TODO: Resizing doesn't work in Geckodriver yet
+                {SupportedWebDriver.FIREFOX },      // TODO: Resizing doesn't work in Geckodriver yet
                 {SupportedWebDriver.CHROME },
                 {SupportedWebDriver.PHANTOMJS }
         });
