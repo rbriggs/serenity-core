@@ -1027,10 +1027,6 @@ public abstract class PageObject {
     }
 
     public WebElementFacade waitFor(WebElement webElement) {
-        return waitFor($(webElement));
-    }
-
-    public WebElementFacade waitFor(WebElementFacade webElement) {
         return getRenderedView().waitFor(webElement);
     }
 

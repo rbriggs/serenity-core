@@ -9,18 +9,39 @@ import net.thucydides.core.webdriver.WebDriverFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import java.util.Arrays;
+import java.util.Collection;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+@RunWith(Parameterized.class)
 public class WhenResizingTheBrowser {
+
+    private final SupportedWebDriver driverType;
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> testData() {
+        return Arrays.asList(new Object[][] {
+          //    {SupportedWebDriver.FIREFOX },      // TODO: Resizing doesn't work in Geckodriver yet
+                {SupportedWebDriver.CHROME },
+                {SupportedWebDriver.PHANTOMJS }
+        });
+    }
 
     private StaticSitePage page;
     private EnvironmentVariables environmentVariables;
     private WebDriver driver;
     WebDriverFactory factory;
+
+    public WhenResizingTheBrowser(SupportedWebDriver driverType) {
+        this.driverType = driverType;
+    }
 
     @Before
     public void setupFactory() {
@@ -37,16 +58,15 @@ public class WhenResizingTheBrowser {
 
     @Test
     public void should_resize_browser_automatically() {
-        environmentVariables.setProperty("thucydides.browser.height", "200");
+        environmentVariables.setProperty("thucydides.browser.height", "300");
         environmentVariables.setProperty("thucydides.browser.width", "400");
 
-        driver = factory.newInstanceOf(SupportedWebDriver.FIREFOX);
+        driver = factory.newInstanceOf(driverType);
         page = new StaticSitePage(driver, 1000);
         page.open();
 
         Dimension screenSize = driver.manage().window().getSize();
-//        int width = screenSize.width;// ((Long)(((JavascriptExecutor)driver).executeScript("return window.innerWidth"))).intValue();
         assertThat(screenSize.width, is(400));
-        assertThat(screenSize.height, is(200));
+        assertThat(screenSize.height, is(300));
     }
 }
