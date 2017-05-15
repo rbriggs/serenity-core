@@ -87,7 +87,7 @@ public class DriverServiceExecutable {
     }
 
     public File asAFile() {
-        Optional<String> defaultPath = Optional.fromNullable(CommandLine.find(exeName));
+        Optional<String> defaultPath = Optional.fromNullable(null /*CommandLine.find(exeName)*/);
 
         Optional<String> configuredBinaryPath = Optional.fromNullable(environmentVariables.getProperty(exeProperty));
         String exePath = configuredBinaryPath.or(defaultPath).orNull();
@@ -117,7 +117,7 @@ public class DriverServiceExecutable {
                 "The driver executable does not exist: %s", exe.getAbsolutePath());
         checkState(!exe.isDirectory(),
                 "The driver executable is a directory: %s", exe.getAbsolutePath());
-        checkState(FileHandler.canExecute(exe),
+        checkState(exe.canExecute(),
                 "The driver is not executable: %s", exe.getAbsolutePath());
     }
 }
