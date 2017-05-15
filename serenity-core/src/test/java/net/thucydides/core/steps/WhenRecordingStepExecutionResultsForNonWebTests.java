@@ -213,7 +213,6 @@ public class WhenRecordingStepExecutionResultsForNonWebTests {
     }
 
     @Test
-<<<<<<< HEAD
     @Ignore("Fix me")
     public void screenshots_should_not_be_taken_after_steps_for_non_webtest_steps() {
 
@@ -231,9 +230,6 @@ public class WhenRecordingStepExecutionResultsForNonWebTests {
     }
 
     @Test
-=======
-
->>>>>>> bc623118be1fd1307188610e9f032537a47b53fa
     public void if_all_child_steps_are_ignored_the_overall_step_should_be_ignored() {
 
         StepEventBus.getEventBus().testSuiteStarted(MyTestCase.class);
